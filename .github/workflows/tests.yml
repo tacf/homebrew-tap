@@ -43,7 +43,9 @@ jobs:
       - run: brew test-bot --only-setup
       - name: Test tap syntax
         run: |
-          mv scripts/update-formula.sh "${RUNNER_TEMP}/update-formula.sh"
-          trap 'mv "${RUNNER_TEMP}/update-formula.sh" scripts/update-formula.sh' EXIT
+          tap_dir="$(brew --repository tacf/tap)"
+          ignored_script="${RUNNER_TEMP}/update-formula.sh"
+          mv "${tap_dir}/scripts/update-formula.sh" "${ignored_script}"
+          trap 'mv "${ignored_script}" "${tap_dir}/scripts/update-formula.sh"' EXIT
           brew test-bot --only-tap-syntax
       - run: brew test-bot --only-formulae
