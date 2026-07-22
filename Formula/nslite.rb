@@ -1,8 +1,8 @@
 class Nslite < Formula
   desc "Small, extensible text editor based on rxi/lite"
   homepage "https://github.com/tacf/nslite"
-  url "https://github.com/tacf/nslite/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "cdb23b80f46e6d6d8e3ebd756730ea87da5dd8ccd49c3745cfcab16948c02cde"
+  url "https://github.com/tacf/nslite/archive/refs/tags/v1.0.1.tar.gz"
+  sha256 "e79f34f30903b604c320f370f379170f2651a5916a27d022ae17a516239a3bb0"
   license "MIT"
 
   depends_on "cmake" => :build
