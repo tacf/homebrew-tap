@@ -41,5 +41,9 @@ jobs:
 
       - run: brew test-bot --only-cleanup-before
       - run: brew test-bot --only-setup
-      - run: brew test-bot --only-tap-syntax
+      - name: Test tap syntax
+        run: |
+          mv scripts/update-formula.sh "${RUNNER_TEMP}/update-formula.sh"
+          trap 'mv "${RUNNER_TEMP}/update-formula.sh" scripts/update-formula.sh' EXIT
+          brew test-bot --only-tap-syntax
       - run: brew test-bot --only-formulae
