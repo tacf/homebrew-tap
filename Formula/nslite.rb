@@ -1,8 +1,8 @@
 class Nslite < Formula
   desc "Small, extensible text editor based on rxi/lite"
   homepage "https://github.com/tacf/nslite"
-  url "https://github.com/tacf/nslite/archive/refs/tags/v2.1.0.tar.gz"
-  sha256 "de1fe3f502154ac7e9577cf9ffc647dc456e080a46f95f3f0ada384f3af37d03"
+  url "https://github.com/tacf/nslite/archive/refs/tags/v2.1.1.tar.gz"
+  sha256 "841ec57225778eed41e05fc1cf4487061b098da71eefdd977b001d4ea341ad45"
   license "MIT"
 
   depends_on "cmake" => :build
@@ -19,12 +19,14 @@ class Nslite < Formula
                     *std_cmake_args
     system "cmake", "--build", "build", "--parallel"
 
+    system "/usr/bin/codesign", "--force", "--sign", "-", "build/nsl" if OS.mac?
+
     libexec.install "build/nsl", "data"
     bin.write_exec_script libexec/"nsl"
   end
 
   test do
-    assert_predicate bin/"nsl", :executable?
+    assert_predicate libexec/"nsl", :executable?
     assert_path_exists libexec/"data/core/init.lua"
   end
 end
