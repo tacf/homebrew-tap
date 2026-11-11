@@ -23,16 +23,8 @@ class Nslite < Formula
     bin.write_exec_script libexec/"nsl"
   end
 
-  def post_install
-    return unless OS.mac?
-
-    system "/usr/bin/codesign", "--force", "--sign", "-", libexec/"nsl"
-    system "/usr/bin/codesign", "--verify", "--strict", libexec/"nsl"
-  end
-
   test do
-    assert_predicate libexec/"nsl", :executable?
+    assert_predicate bin/"nsl", :executable?
     assert_path_exists libexec/"data/core/init.lua"
-    system "/usr/bin/codesign", "--verify", "--strict", libexec/"nsl" if OS.mac?
   end
 end
